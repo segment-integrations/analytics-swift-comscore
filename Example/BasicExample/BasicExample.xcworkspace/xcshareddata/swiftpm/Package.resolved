@@ -14,9 +14,9 @@
         "package": "ComScore",
         "repositoryURL": "https://github.com/comScore/Comscore-Swift-Package-Manager",
         "state": {
-          "branch": null,
+          "branch": "master",
           "revision": "7e3c521ad689b0e2bbf5cfb62e19c9e1619feae2",
-          "version": "6.10.0"
+          "version": null
         }
       },
       {

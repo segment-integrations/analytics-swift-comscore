@@ -25,7 +25,7 @@ let package = Package(
             from: "1.1.2"
         ),
         .package(
-            name: "comScore",
+            name: "ComScore",
             url: "https://github.com/comScore/Comscore-Swift-Package-Manager",
             from: "6.10.0"
         ),
@@ -35,7 +35,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "SegmentComscore",
-            dependencies: ["Segment", "comScore"]),
+            dependencies: ["Segment", "ComScore"]),
         
         // TESTS ARE HANDLED VIA THE EXAMPLE APP.
     ]

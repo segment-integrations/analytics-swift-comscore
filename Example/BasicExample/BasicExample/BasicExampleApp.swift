@@ -20,7 +20,7 @@ struct BasicExampleApp: App {
 
 extension Analytics {
     static var main: Analytics {
-        let analytics = Analytics(configuration: Configuration(writeKey: "7O86AjgXwDLHxwXapRDkSFvqRzLA5n1V")
+        let analytics = Analytics(configuration: Configuration(writeKey: "W")
                     .flushAt(1)
                     .trackApplicationLifecycleEvents(true))
         analytics.add(plugin: ComscoreDestination())

@@ -16,6 +16,9 @@
 		46EDC71327C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EDC71227C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift */; };
 		46EDC72127C6B92C00B870D7 /* Segment in Frameworks */ = {isa = PBXBuildFile; productRef = 46EDC72027C6B92C00B870D7 /* Segment */; };
 		821E6E4C286B729000335B64 /* SegmentComscore in Frameworks */ = {isa = PBXBuildFile; productRef = 821E6E4B286B729000335B64 /* SegmentComscore */; };
+		82C21CA32915B4CB00121B41 /* ComScore in Frameworks */ = {isa = PBXBuildFile; productRef = 82C21CA22915B4CB00121B41 /* ComScore */; };
+		82FA3AEB291992E2001BA547 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FA3AE9291992E2001BA547 /* Version.swift */; };
+		82FA3AEC291992E2001BA547 /* ComscoreDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FA3AEA291992E2001BA547 /* ComscoreDestination.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,8 @@
 		46EDC70C27C6B8D200B870D7 /* BasicExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EDC71027C6B8D200B870D7 /* BasicExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicExampleUITests.swift; sourceTree = "<group>"; };
 		46EDC71227C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		82FA3AE9291992E2001BA547 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		82FA3AEA291992E2001BA547 /* ComscoreDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComscoreDestination.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82C21CA32915B4CB00121B41 /* ComScore in Frameworks */,
 				46EDC72127C6B92C00B870D7 /* Segment in Frameworks */,
 				821E6E4C286B729000335B64 /* SegmentComscore in Frameworks */,
 			);
@@ -78,6 +84,7 @@
 		46EDC6E927C6B8D100B870D7 = {
 			isa = PBXGroup;
 			children = (
+				82FA3AE8291992E2001BA547 /* SegmentComscore */,
 				46EDC6F427C6B8D100B870D7 /* BasicExample */,
 				46EDC70527C6B8D200B870D7 /* BasicExampleTests */,
 				46EDC70F27C6B8D200B870D7 /* BasicExampleUITests */,
@@ -139,6 +146,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		82FA3AE8291992E2001BA547 /* SegmentComscore */ = {
+			isa = PBXGroup;
+			children = (
+				82FA3AE9291992E2001BA547 /* Version.swift */,
+				82FA3AEA291992E2001BA547 /* ComscoreDestination.swift */,
+			);
+			name = SegmentComscore;
+			path = ../../Sources/SegmentComscore;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,6 +175,7 @@
 			packageProductDependencies = (
 				46EDC72027C6B92C00B870D7 /* Segment */,
 				821E6E4B286B729000335B64 /* SegmentComscore */,
+				82C21CA22915B4CB00121B41 /* ComScore */,
 			);
 			productName = BasicExample;
 			productReference = 46EDC6F227C6B8D100B870D7 /* BasicExample.app */;
@@ -233,6 +251,7 @@
 			mainGroup = 46EDC6E927C6B8D100B870D7;
 			packageReferences = (
 				46EDC71F27C6B92C00B870D7 /* XCRemoteSwiftPackageReference "analytics-swift" */,
+				82C21CA12915B4CB00121B41 /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */,
 			);
 			productRefGroup = 46EDC6F327C6B8D100B870D7 /* Products */;
 			projectDirPath = "";
@@ -277,6 +296,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				46EDC6F827C6B8D100B870D7 /* ContentView.swift in Sources */,
+				82FA3AEC291992E2001BA547 /* ComscoreDestination.swift in Sources */,
+				82FA3AEB291992E2001BA547 /* Version.swift in Sources */,
 				46EDC6F627C6B8D100B870D7 /* BasicExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -608,6 +629,14 @@
 				kind = branch;
 			};
 		};
+		82C21CA12915B4CB00121B41 /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/comScore/Comscore-Swift-Package-Manager";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -619,6 +648,11 @@
 		821E6E4B286B729000335B64 /* SegmentComscore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SegmentComscore;
+		};
+		82C21CA22915B4CB00121B41 /* ComScore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 82C21CA12915B4CB00121B41 /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */;
+			productName = ComScore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
