@@ -32,7 +32,10 @@ import CoreMedia
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-
+@objc(SEGComscoreDestination)
+public class ObjCSegmentComscore: NSObject, ObjCDestination, ObjCDestinationShim {
+    public func instance() -> DestinationPlugin { return ComscoreDestination() }
+}
 class ComscoreDestination: DestinationPlugin {
     let timeline = Timeline()
     let type = PluginType.destination
@@ -93,9 +96,6 @@ class ComscoreDestination: DestinationPlugin {
             let mappedTraits = convertToStringFormatFrom(data: traits)
             for (key, value) in mappedTraits {
                 SCORAnalytics.configuration().setPersistentLabelWithName(key, value: value)
-                
-                analytics?.log(message: "SCORAnalytics.configuration.setPersistentLabelWithName(\(key), value: \(value))",
-                               kind: .debug)
             }
         }
         
@@ -119,9 +119,6 @@ class ComscoreDestination: DestinationPlugin {
             }
         }
         SCORAnalytics.notifyHiddenEvent(withLabels: hiddenLabels)
-        analytics?.log(message: "SCORAnalytics.notifyHiddenEvent(withLabels: \(hiddenLabels))",
-                       kind: .debug)
-        
         return event
     }
     
@@ -130,7 +127,6 @@ class ComscoreDestination: DestinationPlugin {
         if let eventName = event.name {
             let viewLabels = ["name": eventName]
             SCORAnalytics.notifyViewEvent(withLabels: viewLabels)
-            analytics?.log(message: "SCORAnalytics.notifyViewEvent(withLabels: \(viewLabels)", kind: .debug)
         }
         
         return event
@@ -138,7 +134,6 @@ class ComscoreDestination: DestinationPlugin {
     
     func flush() {
         SCORAnalytics.flushOfflineCache()
-        analytics?.log(message: "SCORAnalytics.flushOfflineCache()", kind: .debug)
     }
 }
 
@@ -275,7 +270,7 @@ private extension ComscoreDestination {
                 videoAdCompleted(event: event, properties: properties)
                 return true
             default:
-                analytics?.log(message: "No video track calls", kind: .debug)
+                debugPrint("No video track calls")
         }
         
         return false
@@ -297,7 +292,6 @@ private extension ComscoreDestination {
         streamAnalytics?.configuration().addLabels(map)
         streamAnalytics?.setMetadata(instantiateContentMetaData(properties: map))
         configurationLabels = configurationLabels.merging(map) { $1 }
-        analytics?.log(message: "streamAnalytics.createPlaybackSessionWithLabels: \(map)", kind: .debug)
     }
     
     func videoPlaybackPaused(event: TrackEvent, properties: JSON) {
@@ -308,7 +302,6 @@ private extension ComscoreDestination {
             
             streamAnalytics?.setMetadata(instantiateContentMetaData(properties: map))
         }
-        analytics?.log(message: "streamAnalytics.notifyPause", kind: .debug)
     }
     
     func videoPlaybackBufferStarted(event: TrackEvent, properties: JSON) {
@@ -322,8 +315,6 @@ private extension ComscoreDestination {
         
         movePosition(properties)
         streamAnalytics?.notifyBufferStart()
-        
-        analytics?.log(message: "streamAnalytics.notifyBufferStart", kind: .debug)
     }
     
     func videoPlaybackBufferCompleted(event: TrackEvent, properties: JSON) {
@@ -337,8 +328,6 @@ private extension ComscoreDestination {
         
         movePosition(properties)
         streamAnalytics?.notifyBufferStop()
-        
-        analytics?.log(message: "streamAnalytics.notifyBufferStop", kind: .debug)
     }
     
     func videoPlaybackSeekStarted(event: TrackEvent, properties: JSON) {
@@ -352,8 +341,6 @@ private extension ComscoreDestination {
         
         seekPosition(properties)
         streamAnalytics?.notifySeekStart()
-        
-        analytics?.log(message: "streamAnalytics.notifySeekStart", kind: .debug)
     }
     
     func videoPlaybackSeekCompleted(event: TrackEvent, properties: JSON) {
@@ -367,8 +354,6 @@ private extension ComscoreDestination {
         
         seekPosition(properties)
         streamAnalytics?.notifyPlay()
-        
-        analytics?.log(message: "streamAnalytics.notifyPlay", kind: .debug)
     }
     
     // MARK: - Content Methods
@@ -384,8 +369,6 @@ private extension ComscoreDestination {
         
         movePosition(properties)
         streamAnalytics?.notifyPlay()
-        
-        analytics?.log(message: "streamAnalytics.notifyPlay", kind: .debug)
     }
 
     func videoContentPlaying(event: TrackEvent, properties: JSON) {
@@ -405,14 +388,11 @@ private extension ComscoreDestination {
         
         movePosition(properties)
         streamAnalytics?.notifyPlay()
-        
-        analytics?.log(message: "streamAnalytics.notifyPlay", kind: .debug)
     }
     
     func videoContentCompleted(event: TrackEvent, properties: JSON) {
         streamAnalytics?.notifyEnd()
         configurationLabels = [String: Any]()
-        analytics?.log(message: "streamAnalytics.notifyPlay", kind: .debug)
     }
     
     // MARK: - Ad Methods
@@ -455,20 +435,16 @@ private extension ComscoreDestination {
         
         movePosition(properties)
         streamAnalytics?.notifyPlay()
-        
-        analytics?.log(message: "streamAnalytics.notifyPlay", kind: .debug)
     }
 
     func videoAdPlaying(event: TrackEvent, properties: JSON) {
         movePosition(properties)
         streamAnalytics?.notifyPlay()
-        analytics?.log(message: "streamAnalytics.notifyPlay", kind: .debug)
     }
     
     func videoAdCompleted(event: TrackEvent, properties: JSON) {
         movePosition(properties)
         streamAnalytics?.notifyEnd()
-        analytics?.log(message: "streamAnalytics.notifyEnd", kind: .debug)
     }
 }
 
@@ -664,7 +640,7 @@ private class ComscoreEnrichment: EventPlugin {
             do {
                 returnEvent.properties = try JSON(comscoreProperties)
             } catch {
-                analytics?.log(message: "Could not convert comscore properties", kind: .debug)
+                debugPrint(error)
             }
         }
         return returnEvent
