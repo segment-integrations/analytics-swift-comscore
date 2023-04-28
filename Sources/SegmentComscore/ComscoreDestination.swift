@@ -33,8 +33,8 @@ import CoreMedia
 // SOFTWARE.
 //
 @objc(SEGComscoreDestination)
-public class ObjCSegmentComscore: NSObject, ObjCDestination, ObjCDestinationShim {
-    public func instance() -> DestinationPlugin { return ComscoreDestination() }
+public class ObjCSegmentComscore: NSObject, ObjCPlugin, ObjCPluginShim  {
+    public func instance() -> EventPlugin { return ComscoreDestination() }
 }
 class ComscoreDestination: DestinationPlugin {
     let timeline = Timeline()
